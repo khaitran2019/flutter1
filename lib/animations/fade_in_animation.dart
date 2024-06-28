@@ -1,23 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FadeIn extends StatefulWidget {
-  const FadeIn({super.key, required this.child});
+class FadeInAnimation extends StatefulWidget {
+  const FadeInAnimation({super.key, required this.child});
 
   final Widget child;
 
   @override
-  State<FadeIn> createState() => _FadeInState();
+  State<FadeInAnimation> createState() => _FadeInAnimationState();
 }
 
-class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
+class _FadeInAnimationState extends State<FadeInAnimation> with SingleTickerProviderStateMixin {
 
   late final AnimationController _animationController;
   late final Animation<double> _scaleAnimation, _opacityAnimation;
 
   @override
   void initState() {
-    _animationController = AnimationController(duration: const Duration(milliseconds: 800), vsync: this);
+    _animationController = AnimationController(duration: const Duration(milliseconds: 500), vsync: this);
 
     super.initState();
 
@@ -28,7 +28,6 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
     _opacityAnimation = Tween<double>(begin: 0.5, end: 1.0).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOutSine)
     );
-
     _animationController.forward();
   }
 
