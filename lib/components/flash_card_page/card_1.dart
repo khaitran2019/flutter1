@@ -20,17 +20,20 @@ class Card1 extends StatelessWidget {
       builder: (_,notifier, __ ) => GestureDetector(
         onDoubleTap: (){
           notifier.runFlipCard1();
+          notifier.setIgnoreTouches(ignore: true);
         },
         child: HaftFlipAnimation(
           animate: notifier.flipCard1,
           reset: notifier.resetFlipCard1,
           flipFromHaftWay: false,
           animationCompleted: () {
-            print("card 1 completed");
             notifier.resetCard1();
             notifier.runFlipCard2();
           },
           child: SlideAnimation(
+            animationCompleted: (){
+              notifier.setIgnoreTouches(ignore: false);
+            },
             reset: notifier.resetSlideCard1,
             animate: notifier.slideCard1,
             direction: SlideDirection.upIn,

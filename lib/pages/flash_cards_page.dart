@@ -35,11 +35,14 @@ class _FlashCardsPageState extends State<FlashCardsPage> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(56),
             child: CustomAppBar()),
-        body: Stack(
-          children: [
-            Card2(),
-            Card1()],
-            ),
+        body: IgnorePointer(
+          ignoring: notifier.ignoreTouches,
+          child: Stack(
+            children: [
+              Card2(),
+              Card1()],
+              ),
+        ),
       ),
     );
   }

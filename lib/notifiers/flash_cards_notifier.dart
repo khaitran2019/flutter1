@@ -16,7 +16,14 @@ class FlashCardsNotifier extends ChangeNotifier{
   bool resetFlipCard2 = false;
   bool resetSwipeCard2 = false;
 
+  bool ignoreTouches = true;
+
   SlideDirection swipeDirection = SlideDirection.none;
+
+  setIgnoreTouches({required bool ignore}){
+    ignoreTouches = ignore;
+    notifyListeners();
+  }
 
   setTopic({required String topic}){
     this.topic = topic;
