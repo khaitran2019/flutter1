@@ -23,13 +23,16 @@ class Card1 extends StatelessWidget {
         },
         child: HaftFlipAnimation(
           animate: notifier.flipCard1,
-          reset: false,
+          reset: notifier.resetFlipCard1,
           flipFromHaftWay: false,
           animationCompleted: () {
-            print("Ani flip 1 completed");
+            print("card 1 completed");
+            notifier.resetCard1();
             notifier.runFlipCard2();
           },
           child: SlideAnimation(
+            reset: notifier.resetSlideCard1,
+            animate: notifier.slideCard1,
             direction: SlideDirection.upIn,
             child: Center(
               child: Container(

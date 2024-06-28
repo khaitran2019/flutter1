@@ -18,24 +18,41 @@ class Card2 extends StatelessWidget {
 
     return Consumer<FlashCardsNotifier>(
       builder: (_,notifier, __ ) => GestureDetector(
+        onHorizontalDragEnd: (details){
+          if(details.primaryVelocity! > 100){
+            notifier.runSwipeCard2(direction: SlideDirection.rightAway);
+            // notifier.resetCard2();
+            notifier.runSlideCard1();
+          }
 
+          if(details.primaryVelocity! < -100){
+            notifier.runSwipeCard2(direction: SlideDirection.leftAway);
+
+            notifier.runSlideCard1();
+          }
+        },
         child: HaftFlipAnimation(
           animate: notifier.flipCard2,
-          reset: false,
+          reset: notifier.resetFlipCard2,
           flipFromHaftWay: true,
           animationCompleted: () {
             print("Ani flip 2 completed");
           },
           child: SlideAnimation(
-            direction: SlideDirection.upIn,
+            animationCompleted: (){
+              notifier.resetCard2();
+            },
+            reset: notifier.resetSwipeCard2,
+            animate: notifier.swipeCard2,
+            direction: notifier.swipeDirection,
             child: Center(
               child: Container(
                   width: size.width* 0.9,
                   height: size.height*0.7,
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor
+                      color: Colors.pink
                   ),
-                  child: Text("Hello")),
+                  child: Text("2222")),
             ),
           ),
         ),
