@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,12 +25,14 @@ class Card2 extends StatelessWidget {
             notifier.setIgnoreTouches(ignore: true);
             notifier.runSwipeCard2(direction: SlideDirection.rightAway);
             notifier.runSlideCard1();
+            notifier.generateCurrentWord();
           }
 
           if(details.primaryVelocity! < -100){
             notifier.setIgnoreTouches(ignore: true);
             notifier.runSwipeCard2(direction: SlideDirection.leftAway);
             notifier.runSlideCard1();
+            notifier.generateCurrentWord();
           }
         },
         child: HaftFlipAnimation(
@@ -52,10 +56,28 @@ class Card2 extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.pink
                   ),
-                  child: Text("2222")),
+                  child: FlippedText(text: notifier.word2.character)),
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FlippedText extends StatelessWidget {
+  final String text;
+
+  const FlippedText({required this.text, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform(
+      alignment: Alignment.center,
+      transform: Matrix4.identity()..rotateY(pi),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 24),
       ),
     );
   }

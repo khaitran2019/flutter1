@@ -1,6 +1,8 @@
 import 'package:flashcard1/enum/slide_direction.dart';
 import 'package:flutter/material.dart';
 
+import '../configs/constants.dart';
+
 class SlideAnimation extends StatefulWidget {
   const SlideAnimation({super.key, required this.child, required this.direction, this.animate = true, this.reset, this.animationCompleted});
 
@@ -21,7 +23,7 @@ class _SlideAnimationState extends State<SlideAnimation> with SingleTickerProvid
   @override
   void initState() {
     _animationController = AnimationController(
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: kSlideAwayDuration),
         vsync: this)..addListener((){
           if(_animationController.isCompleted){
             widget.animationCompleted?.call();

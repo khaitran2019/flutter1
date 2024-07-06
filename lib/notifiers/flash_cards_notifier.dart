@@ -1,4 +1,9 @@
+import 'dart:math';
+
+import 'package:flashcard1/configs/constants.dart';
+import 'package:flashcard1/data/words.dart';
 import 'package:flashcard1/enum/slide_direction.dart';
+import 'package:flashcard1/models/word.dart';
 import 'package:flutter/material.dart';
 
 class FlashCardsNotifier extends ChangeNotifier{
@@ -19,6 +24,31 @@ class FlashCardsNotifier extends ChangeNotifier{
   bool ignoreTouches = true;
 
   SlideDirection swipeDirection = SlideDirection.none;
+
+  Word word1 = Word(topic: "topic", english: "english", character: "character", ipa: "ipa");
+  Word word2 = Word(topic: "topic", english: "english", character: "character", ipa: "ipa");
+
+  List<Word> selectedWords = [];
+
+  generateAllSelectedWords(){
+    selectedWords.clear();
+    selectedWords = words.where((element) => element.topic == this.topic).toList();
+  }
+
+  generateCurrentWord(){
+    if(selectedWords.isEmpty){
+      // generateAllSelectedWords();
+      print("All words are selected");
+    } else {
+      final r = Random().nextInt(selectedWords.length);
+      word1 = selectedWords[r];
+      selectedWords.removeAt(r);
+    }
+
+    Future.delayed(Duration(milliseconds: kSlideAwayDuration), (){
+      word2 = word1;
+    });
+  }
 
   setIgnoreTouches({required bool ignore}){
     ignoreTouches = ignore;

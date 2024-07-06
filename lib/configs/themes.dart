@@ -17,7 +17,7 @@ final appTheme = ThemeData(
     elevation: 0,
     centerTitle: true,
     titleTextStyle: TextStyle(
-      // fontFamily: GoogleFonts.lato().fontFamily,
+      fontFamily: GoogleFonts.lato().fontFamily,
       fontSize: 20,
       fontWeight: FontWeight.bold
     ),

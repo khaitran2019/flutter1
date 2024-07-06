@@ -44,7 +44,7 @@ class Card1 extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Theme.of(context).primaryColor
                   ),
-                  child: Text("Hello")),
+                  child: Text(notifier.word1.english)),
             ),
           ),
         ),
