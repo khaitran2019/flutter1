@@ -4,13 +4,18 @@ import 'package:flutter/material.dart';
 import '../configs/constants.dart';
 
 class SlideAnimation extends StatefulWidget {
-  const SlideAnimation({super.key, required this.child, required this.direction, this.animate = true, this.reset, this.animationCompleted});
+  const SlideAnimation({super.key, required this.child, required this.direction,
+    this.animate = true, this.reset, this.animationCompleted,
+    this.aniDuration = kSlideAwayDuration,
+    this.aniDelay = 0});
 
   final Widget child;
   final SlideDirection direction;
   final bool animate;
   final bool? reset;
   final VoidCallback? animationCompleted;
+  final int aniDuration;
+  final int aniDelay;
 
   @override
   State<SlideAnimation> createState() => _SlideAnimationState();
@@ -23,16 +28,16 @@ class _SlideAnimationState extends State<SlideAnimation> with SingleTickerProvid
   @override
   void initState() {
     _animationController = AnimationController(
-        duration: Duration(milliseconds: kSlideAwayDuration),
+        duration: Duration(milliseconds: widget.aniDuration),
         vsync: this)..addListener((){
           if(_animationController.isCompleted){
             widget.animationCompleted?.call();
           }
     });
 
-    if(widget.animate) {
-      _animationController.forward();
-    }
+    // if(widget.animate) {
+    //   _animationController.forward();
+    // }
     super.initState();
   }
 
@@ -43,8 +48,22 @@ class _SlideAnimationState extends State<SlideAnimation> with SingleTickerProvid
     }
 
     if(widget.animate) {
-      _animationController.forward();
+      if(widget.aniDelay > 0) {
+        Future.delayed(Duration(milliseconds: widget.aniDelay), () {
+          if(mounted){
+            _animationController.forward();
+          }
+        });
+      } else {
+        _animationController.forward();
+      }
     }
+    // Future.delayed(Duration(milliseconds: widget.aniDelay),(){
+    //   if(mounted) {
+    //     _animationController.forward();
+    //   }
+    // });
+
     super.didUpdateWidget(oldWidget);
   }
 

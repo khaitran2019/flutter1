@@ -1,4 +1,5 @@
 import 'package:flashcard1/animations/fade_in_animation.dart';
+import 'package:flashcard1/configs/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/methods.dart';
@@ -20,8 +21,12 @@ class TopicTile extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(kBorderCir),
             color: Theme.of(context).primaryColor,
+            // border: Border.all(
+            //   color: Colors.white,
+            //   width: kCardBorderWidth,
+            // )
           ),
           child: Column(
             children: [

@@ -25,8 +25,8 @@ class FlashCardsNotifier extends ChangeNotifier{
 
   SlideDirection swipeDirection = SlideDirection.none;
 
-  Word word1 = Word(topic: "topic", english: "english", character: "character", ipa: "ipa");
-  Word word2 = Word(topic: "topic", english: "english", character: "character", ipa: "ipa");
+  Word word1 = Word(topic: "", english: "Loading", character: "character", ipa: "ipa");
+  Word word2 = Word(topic: "", english: "Loading", character: "character", ipa: "ipa");
 
   List<Word> selectedWords = [];
 
